@@ -2,10 +2,19 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="hero-section">
-    <div class="hero-overlay">
-        <h1 class="display-3 fw-bold">Welcome to Picklr</h1>
-        <p class="lead fs-4">Your online pickleball booking platform.</p>
-        <p>Use the navigation above to explore clubs, programs, and our shop.</p>
+<div style="position:relative; text-align:center; margin-left:calc(var(--bs-gutter-x, 1.5rem) * -0.5); margin-right:calc(var(--bs-gutter-x, 1.5rem) * -0.5);">
+    <img src="~/images/pickleball-player.png" alt="Pickleball player"
+         style="width:100%; height:85vh; object-fit:cover; display:block;"
+         onerror="this.style.display='none'" />
+    <div style="position:absolute; top:45%; left:50%; transform:translate(-50%,-50%); width:100%;">
+        <h1 style="font-weight:bold; color:#fff; text-shadow:2px 2px 8px rgba(0,0,0,0.85); font-size:2.8rem;">
+            Welcome to Picklr
+        </h1>
+        <p style="color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,0.85); font-size:1.2rem;">
+            Your online pickleball booking platform.
+        </p>
+        <p style="color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,0.85);">
+            Use the navigation above to explore clubs, programs, and our shop.
+        </p>
     </div>
 </div>
