@@ -1,0 +1,79 @@
+@model ProgramListViewModel
+@{
+    ViewData["Title"] = "Programs";
+}
+
+<div class="row mt-3">
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white fw-bold">Filter Programs</div>
+            <div class="card-body">
+                <form asp-action="Program" method="get">
+                    <div class="mb-3">
+                        <label class="form-label">Club</label>
+                        <select name="clubId" class="form-select">
+                            <option value="">All Clubs</option>
+                            @foreach (var club in Model.Clubs)
+                            {
+                                <option value="@club.ClubID" selected="@(Model.SelectedClubId == club.ClubID)">@club.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <select name="date" class="form-select">
+                            @foreach (var opt in Model.DateOptions)
+                            {
+                                <option value="@opt.Value" selected="@(Model.SelectedDate == opt.Value)">@opt.Label</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mb-2">Search</button>
+                </form>
+                <a asp-action="ClearProgramFilter" class="btn btn-outline-secondary w-100">Clear</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <h2 class="mb-3">Programs for @Model.FriendlyDate</h2>
+
+        @if (!Model.Programs.Any())
+        {
+            <p>No programs match your filters.</p>
+        }
+        else
+        {
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Program</th>
+                        <th>Club</th>
+                        <th>Fee</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var program in Model.Programs)
+                    {
+                        <tr>
+                            <td>
+                                <div class="fw-bold">@program.Name</div>
+                                <div class="text-muted small">@program.Description</div>
+                            </td>
+                            <td>@program.Club?.Name</td>
+                            <td>@program.Fee.ToString("C")</td>
+                            <td>
+                                <form asp-controller="Cart" asp-action="Add" method="post">
+                                    <input type="hidden" name="programId" value="@program.ProgramID" />
+                                    <input type="hidden" name="selectedDate" value="@Model.SelectedDate" />
+                                    <button type="submit" class="btn btn-success btn-sm">Reserve</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

@@ -19,6 +19,10 @@ out/
 # *.db
 # *.sqlite
 
+## Ignore SQLite WAL-mode journal files — transient, regenerated on connect
+*.db-shm
+*.db-wal
+
 ## Do NOT ignore EF Core migrations — keep schema tracked
 # Migrations/
 

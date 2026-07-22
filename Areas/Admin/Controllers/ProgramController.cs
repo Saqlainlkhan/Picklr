@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Picklr.Models;
 
 namespace Picklr.Areas.Admin.Controllers
@@ -16,7 +17,7 @@ namespace Picklr.Areas.Admin.Controllers
         // GET /Admin/Program/List
         public IActionResult List()
         {
-            var programs = context.Programs.OrderBy(p => p.Name).ToList();
+            var programs = context.Programs.Include(p => p.Club).OrderBy(p => p.Name).ToList();
             return View(programs);
         }
 
@@ -26,16 +27,19 @@ namespace Picklr.Areas.Admin.Controllers
         public IActionResult AddEdit(int? id)
         {
             var program = (id == null)
-                ? new PicklProgram()
-                : context.Programs.Find(id) ?? new PicklProgram();
+                ? new PicklrProgram()
+                : context.Programs.Find(id) ?? new PicklrProgram();
 
             ViewBag.Action = (id == null) ? "Add" : "Edit";
+            ViewBag.Clubs = context.Clubs.OrderBy(c => c.Name).ToList();
             return View(program);
         }
 
         [HttpPost]
-        public IActionResult AddEdit(PicklProgram program)
+        public IActionResult AddEdit(PicklrProgram program, string[] days)
         {
+            program.AvailableDays = string.Join(",", days ?? Array.Empty<string>());
+
             if (ModelState.IsValid)
             {
                 if (program.ProgramID == 0)
@@ -49,18 +53,19 @@ namespace Picklr.Areas.Admin.Controllers
             }
 
             ViewBag.Action = (program.ProgramID == 0) ? "Add" : "Edit";
+            ViewBag.Clubs = context.Clubs.OrderBy(c => c.Name).ToList();
             return View(program);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var program = context.Programs.Find(id) ?? new PicklProgram();
+            var program = context.Programs.Find(id) ?? new PicklrProgram();
             return View(program);
         }
 
         [HttpPost]
-        public IActionResult Delete(PicklProgram program)
+        public IActionResult Delete(PicklrProgram program)
         {
             context.Programs.Remove(program);
             context.SaveChanges();

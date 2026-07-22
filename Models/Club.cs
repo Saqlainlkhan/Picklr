@@ -13,5 +13,8 @@ namespace Picklr.Models
         public string Location { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
+
+        // One club has many programs
+        public ICollection<PicklrProgram> Programs { get; set; } = new List<PicklrProgram>();
     }
 }
