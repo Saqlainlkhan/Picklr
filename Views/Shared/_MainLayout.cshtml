@@ -6,65 +6,65 @@
     string act  = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
 }
 
-<div class="container">
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-success mt-2 rounded">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold"
-                   asp-area="" asp-controller="Home" asp-action="Index">Picklr</a>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand fw-bold"
+               asp-area="" asp-controller="Home" asp-action="Index">Picklr</a>
 
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="mainNav">
-                    @* Left-side links *@
-                    <div class="navbar-nav me-auto">
-                        <a class="nav-item nav-link
-                             @(ctrl == "Home" && act == "About" ? "active" : "")"
-                           asp-area="" asp-controller="Home" asp-action="About">About</a>
+            <div class="collapse navbar-collapse" id="mainNav">
+                @* Left-side links *@
+                <div class="navbar-nav me-auto">
+                    <a class="nav-item nav-link
+                         @(ctrl == "Home" && act == "About" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="About">About</a>
 
-                        <a class="nav-item nav-link
-                             @(ctrl == "Home" && act == "Club" ? "active" : "")"
-                           asp-area="" asp-controller="Home" asp-action="Club">Club</a>
+                    <a class="nav-item nav-link
+                         @(ctrl == "Home" && act == "Club" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="Club">Club</a>
 
-                        <a class="nav-item nav-link
-                             @(ctrl == "Home" && act == "Program" ? "active" : "")"
-                           asp-area="" asp-controller="Home" asp-action="Program">Program</a>
+                    <a class="nav-item nav-link
+                         @(ctrl == "Home" && act == "Program" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="Program">Program</a>
 
-                        <a class="nav-item nav-link
-                             @(ctrl == "Home" && act == "Shop" ? "active" : "")"
-                           asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
-                    </div>
+                    <a class="nav-item nav-link
+                         @(ctrl == "Home" && act == "Shop" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
+                </div>
 
-                    @* Right-side cart + Admin link *@
-                    <div class="navbar-nav ms-auto align-items-center">
-                        <a class="nav-item nav-link position-relative me-2" asp-area=""
-                           asp-controller="Cart" asp-action="Index" title="Cart">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                            </svg>
-                            @{ var cartCount = ViewBag.CartCount is int n ? n : 0; }
-                            @if (cartCount > 0)
-                            {
-                                <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">@cartCount</span>
-                            }
-                        </a>
-                        <a class="nav-item nav-link"
-                           asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
-                    </div>
+                @* Right-side cart + Admin link *@
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a class="nav-item nav-link position-relative me-2" asp-area=""
+                       asp-controller="Cart" asp-action="Index" title="Cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        @{ var cartCount = ViewBag.CartCount is int n ? n : 0; }
+                        @if (cartCount > 0)
+                        {
+                            <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">@cartCount</span>
+                        }
+                    </a>
+                    <a class="nav-item nav-link"
+                       asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        @* TempData confirmation message (placeholder for future client-side operations) *@
-        @if (TempData.Keys.Contains("message"))
-        {
-            <div class="alert alert-success mt-2 text-center">@TempData["message"]</div>
-        }
-    </header>
+    @* TempData confirmation message (placeholder for future client-side operations) *@
+    @if (TempData.Keys.Contains("message"))
+    {
+        <div class="alert alert-success mt-2 text-center">@TempData["message"]</div>
+    }
+</header>
 
+<div class="container">
     <main>
         @RenderBody()
         @RenderSection("scripts", required: false)
